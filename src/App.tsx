@@ -1,7 +1,12 @@
-import React from "react";
+import React from 'react';
+import Layout from './components/Layout';
 
 const App: React.FC = () => {
-    return <div>Hello world</div>
-}
+  return (
+    <React.Fragment>
+      <Layout />
+    </React.Fragment>
+  );
+};
 
 export default App;

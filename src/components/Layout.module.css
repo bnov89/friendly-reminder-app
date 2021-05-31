@@ -1,0 +1,6 @@
+.layout-root {
+    display: flex;
+}
+.under-toolbar {
+    min-height: 64px;
+}
