@@ -1,6 +1,7 @@
 declare namespace LayoutModuleCssNamespace {
   export interface ILayoutModuleCss {
     'layout-root': string;
+    'login-btn': string;
     'under-toolbar': string;
   }
 }
