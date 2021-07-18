@@ -18,11 +18,11 @@ import { NavLink, Route, Switch } from 'react-router-dom';
 import NotFound from './pages/NotFound/NotFound';
 import classes from './Layout.module.css';
 import { Item } from './TodoItem/Item';
-import TodoList from './pages/TodoList/TodoList';
-import NewTodoItem from './NewTodoItem/NewTodoItem';
+import TodoList from './pages/TodoListHooks/TodoList';
+import NewTodoItem from './pages/NewTodoItem/NewTodoItem';
 import Auth from './pages/Auth/Auth';
-import Restricted from './Restricted/Restricted';
-import Counter from './Counter/Counter';
+import Restricted from './pages/Restricted/Restricted';
+import Counter from './pages/Counter/Counter';
 import TodoListClassBased from "./pages/TodoListClassBasedStyle/TodoList";
 
 const Layout: React.FC = () => {

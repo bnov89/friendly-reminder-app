@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CounterAction, CounterState } from '../store/AuthRedux';
+import { CounterAction, CounterState } from '../../store/ReduxStore';
 
 const Counter: React.FC = () => {
   let dispatch = useDispatch();

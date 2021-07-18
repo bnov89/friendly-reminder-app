@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { AuthContext } from "../store/AuthContext";
+import { AuthContext } from "../../store/AuthContext";
 
 const Restricted: React.FC = () => {
   const authCtx = useContext(AuthContext);

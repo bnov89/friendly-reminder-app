@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from './components/Layout';
 import AuthContextProvider from './components/store/AuthContext';
 import { Provider } from 'react-redux';
-import store from './components/store/AuthRedux';
+import store from './components/store/ReduxStore';
 
 const App: React.FC = () => {
   return (

@@ -1,6 +1,6 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { TextField } from '@material-ui/core';
-import { Item } from '../TodoItem/Item';
+import { Item } from '../../TodoItem/Item';
 
 export interface NewTodoItemProps {
   onSaveNewItem: (item: Item) => void;

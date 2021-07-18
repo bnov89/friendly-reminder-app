@@ -8,6 +8,7 @@ export type CounterAction = Action & {
   valueChange: number;
 };
 
+// REDUCER
 const counterReducer = (
   state: CounterState = { counter: 0 },
   action: CounterAction
@@ -24,9 +25,12 @@ const counterReducer = (
   }
   return state;
 };
+
+// STORE
 const store =
   createStore<CounterState, CounterAction, any, any>(counterReducer);
 
+// SUBSCRIBER
 const counterSubscriber = () => {
   const latestState = store.getState();
   console.log(latestState);
