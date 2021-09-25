@@ -1,7 +1,7 @@
 import React from 'react';
 
-const TodoLists: React.FC = () => {
-  return <div>TODO lists</div>
+const TodoList: React.FC = () => {
+  return <div>TodoList</div>
 }
 
-export default TodoLists;
+export default TodoList;
