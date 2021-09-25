@@ -13,11 +13,14 @@ import {
   Typography,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { NavLink, Route, Switch } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
+import ListAltIcon from '@mui/icons-material/ListAlt';
+import { Link, NavLink, Route, Switch } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import TodoList from './pages/TodoLists/TodoLists';
 import NotFound from './pages/NotFound/NotFound';
 import classes from './Layout.module.css';
+import Login from './pages/Login/Login';
 
 const Layout: React.FC = () => {
   const [drawerOpened, setDrawerOpened] = useState(false);
@@ -44,20 +47,22 @@ const Layout: React.FC = () => {
             <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
               News
             </Typography>
-            <Button color="inherit">Login</Button>
+            <Link style={{textDecoration: 'none', color: 'inherit'}} to="/login">
+              <Button color="inherit">Login</Button>
+            </Link>
           </Toolbar>
         </AppBar>
       </Box>
       <Drawer anchor="left" open={drawerOpened} onClose={toggleDrawer}>
         <List>
           <ListItem>
-            <ListItemIcon>{/*<HomeIcon />*/}</ListItemIcon>
+            <ListItemIcon>{<HomeIcon />}</ListItemIcon>
             <NavLink to="/">
               <ListItemText primary="Strona główna" />
             </NavLink>
           </ListItem>
           <ListItem>
-            <ListItemIcon>{/*<ListAltIcon />*/}</ListItemIcon>
+            <ListItemIcon>{<ListAltIcon />}</ListItemIcon>
             <NavLink to="/todo-lists">
               <ListItemText primary="Listy TODO" />
             </NavLink>
@@ -73,6 +78,9 @@ const Layout: React.FC = () => {
             </Route>
             <Route path="/todo-lists">
               <TodoList />
+            </Route>
+            <Route path="/login">
+              <Login />
             </Route>
             <Route>
               <NotFound />
