@@ -7,40 +7,58 @@ export interface RequestConfig {
   body?: BodyInit;
 }
 
-export interface ErrorResponse {}
+export interface ErrorResponse {
+  httpCode: number;
+  error?: Error;
+}
+
+export interface Error {
+  reason: string;
+}
 
 export interface UseHttpReturn {
   isLoading: boolean;
-  sendRequest: () => {};
+  error: ErrorResponse;
+  sendRequest: <T>(
+    requestConfig: RequestConfig,
+    applyData: (data: T) => void
+  ) => Promise<void>;
 }
 
-function useHttp(): {
-  isLoading: boolean;
-  sendRequest: <T>(requestConfig: RequestConfig, applyData: (data: T) => void) => Promise<void>;
-} {
+function useHttp(): UseHttpReturn {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState<ErrorResponse>(null);
 
-  const sendRequest = async function <T>(requestConfig: RequestConfig, applyData: (data: T) => void) {
+  const sendRequest = async function <T>(
+    requestConfig: RequestConfig,
+    applyData: (data: T) => void
+  ) {
     setIsLoading(true);
-    setError(null);
     try {
       const response = await fetch(requestConfig.url, {
         method: requestConfig.method,
         headers: requestConfig.headers ? requestConfig.headers : {},
         body: requestConfig.body ? requestConfig.body : null,
       });
-      if (!response.ok) {
-        throw new Error('Request failed!');
+
+      if (response.ok) {
+        applyData(await response.json());
+        setError(null);
+      } else {
+        setError({
+          httpCode: response.status,
+          error: await response.json(),
+        });
       }
-      const data = await response.json();
-      applyData(data);
     } catch (err) {
-      setError(err.message || 'Something went wrong!');
+      setError({
+        httpCode: err.code,
+        error: { reason: err.message },
+      });
     }
     setIsLoading(false);
   };
-  return { isLoading, sendRequest };
+  return { isLoading, sendRequest, error };
 }
 
 export default useHttp;
