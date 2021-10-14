@@ -7,10 +7,10 @@ import 'regenerator-runtime/runtime';
 import { AuthenticationProvider } from './store/auth-context';
 
 ReactDOM.render(
-  <AuthenticationProvider>
-    <BrowserRouter>
+  <BrowserRouter>
+    <AuthenticationProvider>
       <App />
-    </BrowserRouter>
-  </AuthenticationProvider>,
+    </AuthenticationProvider>
+  </BrowserRouter>,
   document.getElementById('todo-app-root')
 );

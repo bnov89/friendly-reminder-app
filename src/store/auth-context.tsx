@@ -1,29 +1,32 @@
 import React, { useState } from 'react';
 import { LoginData } from '../components/pages/Login/Login';
+import { useHistory } from 'react-router-dom';
 
 const AuthContext = React.createContext({
   isLoggedIn: false,
   login: (loginData: LoginData) => {},
-  logout: () => {}
+  logout: () => {},
 });
 
 export const AuthenticationProvider: React.FC = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const history = useHistory();
 
   function loginHandler(loginData: LoginData) {
     localStorage.setItem('accessToken', loginData.accessToken);
     setIsLoggedIn(true);
+    history.push('/');
   }
 
   function logoutHandler() {
-    localStorage.removeItem('accessToken')
+    localStorage.removeItem('accessToken');
     setIsLoggedIn(false);
   }
 
   const contextValue = {
     isLoggedIn,
     login: loginHandler,
-    logout: logoutHandler
+    logout: logoutHandler,
   };
 
   return (

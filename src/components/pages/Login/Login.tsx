@@ -2,6 +2,7 @@ import React, { ChangeEvent, useContext, useState } from 'react';
 import { Alert, AlertTitle, Box, Button, TextField } from '@mui/material';
 import useHttp from '../../../hooks/use-http';
 import AuthContext from '../../../store/auth-context';
+import { useHistory } from "react-router-dom";
 
 export interface LoginData {
   accessToken: string;

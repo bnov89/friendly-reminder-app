@@ -18,7 +18,7 @@ export interface LeftBarProps {
 const LeftBar: React.FC<LeftBarProps> = ({toggleDrawer, drawerOpened}) => {
   return (
     <Drawer anchor="left" open={drawerOpened} onClose={toggleDrawer}>
-      <List>
+      <List onClick={toggleDrawer}>
         <ListItem>
           <ListItemIcon>{<HomeIcon />}</ListItemIcon>
           <NavLink to="/">

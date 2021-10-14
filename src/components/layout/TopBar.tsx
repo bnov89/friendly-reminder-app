@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
+import AuthContext from '../../store/auth-context';
 
 export interface TopBarProps {
   toggleDrawer: () => void;
 }
 
-const TopBar: React.FC<TopBarProps> = ({toggleDrawer}) => {
+const TopBar: React.FC<TopBarProps> = ({ toggleDrawer }) => {
+  const authContext = useContext(AuthContext);
   return (
     <AppBar position="static">
       <Toolbar>
@@ -24,9 +26,21 @@ const TopBar: React.FC<TopBarProps> = ({toggleDrawer}) => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           News
         </Typography>
-        <Link style={{ textDecoration: 'none', color: 'inherit' }} to="/login">
-          <Button color="inherit">Login</Button>
-        </Link>
+        {!authContext.isLoggedIn ? (
+          <Link
+            style={{ textDecoration: 'none', color: 'inherit' }}
+            to="/login"
+          >
+            <Button color="inherit">Login</Button>
+          </Link>
+        ) : (
+          <Link
+            style={{ textDecoration: 'none', color: 'inherit' }}
+            to="/login"
+          >
+            <Button color="inherit" onClick={authContext.logout}>Logout</Button>
+          </Link>
+        )}
       </Toolbar>
     </AppBar>
   );
