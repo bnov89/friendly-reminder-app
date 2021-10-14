@@ -1,30 +1,27 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent, useContext, useState } from 'react';
 import { Alert, AlertTitle, Box, Button, TextField } from '@mui/material';
 import useHttp from '../../../hooks/use-http';
+import AuthContext from '../../../store/auth-context';
 
-export interface LoginProps {
-  onSuccess: (data: LoginResponse) => void;
-}
-
-export interface LoginResponse {
+export interface LoginData {
   accessToken: string;
 }
 
-const Login: React.FC<LoginProps> = (props) => {
+const Login: React.FC = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
+  let authContext = useContext(AuthContext);
   let useHtt = useHttp();
   const login = (event: React.SyntheticEvent) => {
     event.preventDefault();
-    useHtt.sendRequest<LoginResponse>(
+    useHtt.sendRequest<LoginData>(
       {
         url: 'http://localhost:8080/user/login',
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: username, password: password }),
       },
-      props.onSuccess
+      authContext.login
     );
   };
 
