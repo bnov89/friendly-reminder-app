@@ -6,6 +6,7 @@ import { useHistory } from "react-router-dom";
 
 export interface LoginData {
   accessToken: string;
+  userAccountNumber: string;
 }
 
 const Login: React.FC = (props) => {

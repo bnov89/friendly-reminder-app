@@ -9,11 +9,14 @@ const AuthContext = React.createContext({
 });
 
 export const AuthenticationProvider: React.FC = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(
+    localStorage.getItem('accessToken') !== null
+  );
   const history = useHistory();
 
   function loginHandler(loginData: LoginData) {
     localStorage.setItem('accessToken', loginData.accessToken);
+    localStorage.setItem('userAccountNumber', loginData.userAccountNumber);
     setIsLoggedIn(true);
     history.push('/');
   }
