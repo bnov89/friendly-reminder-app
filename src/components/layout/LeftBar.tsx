@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import {
   Drawer,
   List,
@@ -7,7 +8,6 @@ import {
   ListItemText,
 } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
-import { NavLink } from 'react-router-dom';
 import ListAltIcon from '@mui/icons-material/ListAlt';
 
 export interface LeftBarProps {
@@ -15,22 +15,21 @@ export interface LeftBarProps {
   drawerOpened: boolean;
 }
 
-const LeftBar: React.FC<LeftBarProps> = ({toggleDrawer, drawerOpened}) => {
+const LeftBar: React.FC<LeftBarProps> = ({ toggleDrawer, drawerOpened }) => {
   return (
     <Drawer anchor="left" open={drawerOpened} onClose={toggleDrawer}>
       <List onClick={toggleDrawer}>
         <ListItem>
           <ListItemIcon>{<HomeIcon />}</ListItemIcon>
-          <NavLink to="/">
+          <Link href="/">
             <ListItemText primary="Strona główna" />
-          </NavLink>
+          </Link>
         </ListItem>
-
         <ListItem>
           <ListItemIcon>{<ListAltIcon />}</ListItemIcon>
-          <NavLink to="/todo-lists">
+          <Link href="/todo-lists">
             <ListItemText primary="Listy TODO" />
-          </NavLink>
+          </Link>
         </ListItem>
       </List>
     </Drawer>

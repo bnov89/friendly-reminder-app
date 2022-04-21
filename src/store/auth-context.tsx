@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import { LoginData } from '../components/pages/Login/Login';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { LoginData } from "../pages/login";
 
 const AuthContext = React.createContext({
   isLoggedIn: false,
@@ -10,15 +9,17 @@ const AuthContext = React.createContext({
 
 export const AuthenticationProvider: React.FC = (props) => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(
-    localStorage.getItem('accessToken') !== null
+    false
+    // localStorage.getItem('accessToken') !== null
   );
-  const history = useHistory();
-
+  useEffect(() => {
+    setIsLoggedIn(localStorage.getItem('accessToken') !== null)
+  }, [])
   function loginHandler(loginData: LoginData) {
     localStorage.setItem('accessToken', loginData.accessToken);
     localStorage.setItem('userAccountNumber', loginData.userAccountNumber);
     setIsLoggedIn(true);
-    history.push('/');
+    // history.push('/');
   }
 
   function logoutHandler() {

@@ -1,6 +1,12 @@
+.main {
+    margin: 3rem auto;
+    width: 90%;
+    max-width: 40rem;
+}
+
 .layout-root {
-    /*display: flex;*/
+    display: flex;
 }
 .under-toolbar {
-    /*min-height: 64px;*/
+    min-height: 64px;
 }

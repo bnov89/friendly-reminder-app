@@ -4,13 +4,15 @@ import classes from './Layout.module.css';
 import AuthContext from '../../store/auth-context';
 import TopBar from './TopBar';
 import LeftBar from './LeftBar';
-import Routes from './Routes';
+import { GetServerSideProps } from 'next';
+// import Routes from './Routes';
 
-const Layout: React.FC = () => {
+const Layout: React.FC = (props) => {
   const [drawerOpened, setDrawerOpened] = useState(false);
   const authContext = useContext(AuthContext);
 
   function toggleDrawer() {
+    console.log("DrawerOpened?: " + drawerOpened);
     setDrawerOpened(!drawerOpened);
   }
 
@@ -20,12 +22,13 @@ const Layout: React.FC = () => {
         <TopBar toggleDrawer={toggleDrawer} />
       </Box>
       <LeftBar toggleDrawer={toggleDrawer} drawerOpened={drawerOpened} />
-      <main>
-        <div className={classes['under-toolbar']} />
-        <Routes />
-      </main>
+      <main className={classes.main}>{props.children}</main>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  return { props: {} };
 };
 
 export default Layout;

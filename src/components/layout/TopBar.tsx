@@ -1,8 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from "react";
 import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import AuthContext from '../../store/auth-context';
+import { GetServerSideProps } from "next";
+import Link from "next/link";
 
 export interface TopBarProps {
   toggleDrawer: () => void;
@@ -10,6 +12,11 @@ export interface TopBarProps {
 
 const TopBar: React.FC<TopBarProps> = ({ toggleDrawer }) => {
   const authContext = useContext(AuthContext);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(authContext.isLoggedIn);
+
+  useEffect(() => {
+    setIsLoggedIn(authContext.isLoggedIn);
+  }, [authContext.isLoggedIn])
   return (
     <AppBar position="static">
       <Toolbar>
@@ -26,17 +33,17 @@ const TopBar: React.FC<TopBarProps> = ({ toggleDrawer }) => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           News
         </Typography>
-        {!authContext.isLoggedIn ? (
+        {!isLoggedIn ? (
           <Link
-            style={{ textDecoration: 'none', color: 'inherit' }}
-            to="/login"
+            // style={{ textDecoration: 'none', color: 'inherit' }}
+            href="/login"
           >
             <Button color="inherit">Login</Button>
           </Link>
         ) : (
           <Link
-            style={{ textDecoration: 'none', color: 'inherit' }}
-            to="/login"
+            // style={{ textDecoration: 'none', color: 'inherit' }}
+            href="/login"
           >
             <Button color="inherit" onClick={authContext.logout}>Logout</Button>
           </Link>
@@ -44,6 +51,11 @@ const TopBar: React.FC<TopBarProps> = ({ toggleDrawer }) => {
       </Toolbar>
     </AppBar>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+
+  return { props: {} };
 };
 
 export default TopBar;

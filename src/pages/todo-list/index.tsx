@@ -1,7 +1,6 @@
 import React, { SyntheticEvent, useEffect, useState } from "react";
-import useHttp from "../../../hooks/use-http";
+import useHttp from "../../hooks/use-http";
 import { Box, Button, List, ListItem, ListItemText } from "@mui/material";
-import TodoList from "./TodoList";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -35,7 +34,7 @@ const TodoLists: React.FC = () => {
         }
       },
       (data) => {
-      console.log("Wywolane")
+        console.log(data.todoItemList.todoItems)
         const result: TodoItem[] = data.todoItemList.todoItems.map((value, index) => {return {id: index,  description: value.description}})
         // const todoItemListResult: TodoItemList = {todoItems: result}
         setTodoItemList(result);
@@ -74,9 +73,9 @@ const TodoLists: React.FC = () => {
   return (<Box sx={{ textAlign: "center" }}>
     {itemsListView}
     <form>
-    <Button variant="contained">Add</Button>
+      <Button variant="contained">Add</Button>
     </form>
-    </Box>);
+  </Box>);
 };
 
 export default TodoLists;
