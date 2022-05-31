@@ -1,36 +1,39 @@
 import React, { useEffect, useState } from "react";
 import { LoginData } from "../pages/login";
+import { useRouter } from "next/router";
+import { HOME } from "../components/Paths";
 
 const AuthContext = React.createContext({
   isLoggedIn: false,
-  login: (loginData: LoginData) => {},
-  logout: () => {},
+  login: (loginData: LoginData) => {
+  },
+  logout: () => {
+  }
 });
 
 export const AuthenticationProvider: React.FC = (props) => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(
-    false
-    // localStorage.getItem('accessToken') !== null
-  );
+  const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   useEffect(() => {
-    setIsLoggedIn(localStorage.getItem('accessToken') !== null)
-  }, [])
+    setIsLoggedIn(localStorage.getItem("accessToken") !== null);
+  }, []);
+
   function loginHandler(loginData: LoginData) {
-    localStorage.setItem('accessToken', loginData.accessToken);
-    localStorage.setItem('userAccountNumber', loginData.userAccountNumber);
+    localStorage.setItem("accessToken", loginData.accessToken);
+    localStorage.setItem("userAccountNumber", loginData.userAccountNumber);
     setIsLoggedIn(true);
-    // history.push('/');
+    router.push(HOME);
   }
 
   function logoutHandler() {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem("accessToken");
     setIsLoggedIn(false);
   }
 
   const contextValue = {
     isLoggedIn,
     login: loginHandler,
-    logout: logoutHandler,
+    logout: logoutHandler
   };
 
   return (

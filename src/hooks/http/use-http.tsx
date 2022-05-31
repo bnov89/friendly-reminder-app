@@ -16,9 +16,13 @@ export interface Error {
   reason: string;
 }
 
-export interface UseHttpReturn {
+
+export interface CallState {
   isLoading: boolean;
   error: ErrorResponse;
+}
+
+export interface UseHttpReturn extends CallState {
   sendRequest: <T>(
     requestConfig: RequestConfig,
     applyData: (data: T) => void
@@ -40,7 +44,6 @@ function useHttp(): UseHttpReturn {
         headers: requestConfig.headers ? requestConfig.headers : {},
         body: requestConfig.body ? requestConfig.body : null,
       });
-
       if (response.ok) {
         applyData(await response.json());
         setError(null);

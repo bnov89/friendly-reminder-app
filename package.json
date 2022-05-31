@@ -37,6 +37,8 @@
     "babel-loader": "^8.2.2",
     "css-loader": "^4.0.0",
     "css-modules-typescript-loader": "^4.0.1",
+    "eslint": "8.16.0",
+    "eslint-config-next": "12.1.6",
     "html-webpack-plugin": "^5.3.1",
     "path": "^0.12.7",
     "prettier": "^2.3.0",

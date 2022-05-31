@@ -1,18 +1,16 @@
-import React, { useContext, useState } from 'react';
-import { Box } from '@mui/material';
-import classes from './Layout.module.css';
-import AuthContext from '../../store/auth-context';
-import TopBar from './TopBar';
-import LeftBar from './LeftBar';
-import { GetServerSideProps } from 'next';
+import React, { useContext, useState } from "react";
+import { Box } from "@mui/material";
+import classes from "./Layout.module.css";
+import AuthContext from "../../store/auth-context";
+import TopBar from "./TopBar";
+import LeftBar from "./LeftBar";
+import { GetServerSideProps } from "next";
 // import Routes from './Routes';
 
 const Layout: React.FC = (props) => {
   const [drawerOpened, setDrawerOpened] = useState(false);
-  const authContext = useContext(AuthContext);
 
   function toggleDrawer() {
-    console.log("DrawerOpened?: " + drawerOpened);
     setDrawerOpened(!drawerOpened);
   }
 

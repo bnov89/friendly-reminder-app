@@ -1,13 +1,14 @@
-import React from 'react';
-import App from "../App";
+import React from "react";
 import { GetServerSideProps } from "next";
 
 const HomePage: React.FC = () => {
-  return <App/>
+  return <React.Fragment>
+    This is home page
+  </React.Fragment>;
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   return { props: {} };
 };
 
-export default HomePage
+export default HomePage;

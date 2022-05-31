@@ -1,8 +1,7 @@
-import React, { ChangeEvent, useContext, useState } from 'react';
-import { Alert, AlertTitle, Box, Button, TextField } from '@mui/material';
-import useHttp from '../../hooks/use-http';
-import AuthContext from '../../store/auth-context';
-import { useHistory } from "react-router-dom";
+import React, { ChangeEvent, useContext, useState } from "react";
+import { Alert, AlertTitle, Box, Button, TextField } from "@mui/material";
+import useHttp from "../../hooks/http/use-http";
+import AuthContext from "../../store/auth-context";
 
 export interface LoginData {
   accessToken: string;
@@ -10,25 +9,25 @@ export interface LoginData {
 }
 
 const Login: React.FC = (props) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
   let authContext = useContext(AuthContext);
   let useHtt = useHttp();
   const login = (event: React.SyntheticEvent) => {
     event.preventDefault();
     useHtt.sendRequest<LoginData>(
       {
-        url: 'http://localhost:8080/user/login',
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: username, password: password }),
+        url: "http://localhost:8080/user/login",
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username: username, password: password })
       },
       authContext.login
     );
   };
 
   if (useHtt.error) {
-    console.log('Hello' + JSON.stringify(useHtt.error));
+    console.log("Hello" + JSON.stringify(useHtt.error));
   }
 
   function usernameChangeHandler(event: ChangeEvent<HTMLInputElement>) {
@@ -40,7 +39,7 @@ const Login: React.FC = (props) => {
   }
 
   return (
-    <Box sx={{ textAlign: 'center' }}>
+    <Box sx={{ textAlign: "center" }}>
       {useHtt.error && (
         <Alert severity="error">
           <AlertTitle>Error</AlertTitle>
@@ -48,14 +47,14 @@ const Login: React.FC = (props) => {
         </Alert>
       )}
       <form onSubmit={login}>
-        <Box sx={{ display: 'block', margin: '10px' }}>
+        <Box sx={{ display: "block", margin: "10px" }}>
           <TextField
             id="username"
             label="Username"
             onChange={usernameChangeHandler}
           />
         </Box>
-        <Box sx={{ display: 'block', margin: '10px' }}>
+        <Box sx={{ display: "block", margin: "10px" }}>
           <TextField
             id="password"
             type="password"
@@ -63,7 +62,7 @@ const Login: React.FC = (props) => {
             onChange={passwordChangeHandler}
           />
         </Box>
-        <Box sx={{ display: 'block', margin: '10px' }}>
+        <Box sx={{ display: "block", margin: "10px" }}>
           <Button variant="contained" type="submit">
             Login
           </Button>

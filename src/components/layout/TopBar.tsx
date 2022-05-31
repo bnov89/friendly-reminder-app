@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-// import { Link } from 'react-router-dom';
-import AuthContext from '../../store/auth-context';
+import { AppBar, Button, IconButton, Toolbar, Typography } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import AuthContext from "../../store/auth-context";
 import { GetServerSideProps } from "next";
 import Link from "next/link";
 
@@ -16,7 +15,7 @@ const TopBar: React.FC<TopBarProps> = ({ toggleDrawer }) => {
 
   useEffect(() => {
     setIsLoggedIn(authContext.isLoggedIn);
-  }, [authContext.isLoggedIn])
+  }, [authContext.isLoggedIn]);
   return (
     <AppBar position="static">
       <Toolbar>
